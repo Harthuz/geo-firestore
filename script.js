@@ -21,23 +21,45 @@ function salvarDados() {
         const nome = input.value.trim();
         const topicoTexto = checkbox.nextElementSibling.textContent.trim();
 
-        if (checkbox.checked && nome) {
-            db.collection("participantes").add({
-                topico: topicoTexto,
-                nome: nome,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                console.log(`Dados do tópico ${i} salvos com sucesso!`);
-                // Atualiza o valor do campo de entrada
-                input.value = nome;
+        // Referência à coleção 'participantes'
+        const participantesRef = db.collection("participantes");
+
+        // Consulta para encontrar documentos com o tópico correspondente
+        participantesRef
+            .where("topico", "==", topicoTexto)
+            .get()
+            .then((querySnapshot) => {
+                if (checkbox.checked && nome) {
+                    // Se marcado e nome preenchido, adiciona ou atualiza
+                    if (querySnapshot.empty) {
+                        // Adiciona novo documento
+                        participantesRef.add({
+                            topico: topicoTexto,
+                            nome: nome,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    } else {
+                        // Atualiza documento existente
+                        querySnapshot.forEach((doc) => {
+                            doc.ref.update({
+                                nome: nome,
+                                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                            });
+                        });
+                    }
+                } else {
+                    // Se desmarcado ou nome vazio, remove documentos existentes
+                    querySnapshot.forEach((doc) => {
+                        doc.ref.delete();
+                    });
+                }
             })
             .catch((error) => {
-                console.error(`Erro ao salvar dados do tópico ${i}: `, error);
+                console.error(`Erro ao processar o tópico ${i}: `, error);
             });
-        }
     }
 }
+
 
 // Função para exibir dados uma única vez
 db.collection("participantes").orderBy("timestamp").get().then((querySnapshot) => {
