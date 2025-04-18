@@ -1,47 +1,168 @@
-button {
-    background-color: #0B2433;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
+/* style.css */
 
-button:hover {
-    background-color: #0D3B4C;
-}
-
-button:active {
-    background-color: #09202A;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 30px;
-    color: #333;
-}
-h2 {
-    color: #0B2433;
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Estilo do container principal */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Estilo dos títulos */
+  .container h2 {
     margin-top: 30px;
-}
-.linha {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Estilo das linhas de tópicos */
+  .linha {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    gap: 10px;
-}
-.linha input[type="text"] {
-    padding: 5px;
-    flex: 1;
-}
-.container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+  
+  /* Estilo dos checkboxes */
+  .linha input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Estilo das descrições dos tópicos */
+  .linha span {
+    flex: 1 1 100%;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  /* Estilo dos campos de nome */
+  .linha input[type="text"] {
+    flex: 1 1 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilo do botão salvar */
+  #salvarBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Estilo do botão ao passar o mouse */
+  #salvarBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsividade para telas maiores */
+  @media (min-width: 600px) {
+    .linha {
+      flex-wrap: nowrap;
+    }
+  
+    .linha span {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+    }
+  
+    .linha input[type="text"] {
+      flex: 0 0 200px;
+      margin-left: 10px;
+    }
+  }
+/* style.css */
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilo do container principal */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+  }
+  
+  /* Estilo dos títulos */
+  .container h2 {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Estilo das linhas de tópicos */
+  .linha {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+  
+  /* Estilo dos checkboxes */
+  .linha input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Estilo das descrições dos tópicos */
+  .linha span {
+    flex: 1 1 100%;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  /* Estilo dos campos de nome */
+  .linha input[type="text"] {
+    flex: 1 1 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilo do botão salvar */
+  #salvarBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Estilo do botão ao passar o mouse */
+  #salvarBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsividade para telas maiores */
+  @media (min-width: 600px) {
+    .linha {
+      flex-wrap: nowrap;
+    }
+  
+    .linha span {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+    }
+  
+    .linha input[type="text"] {
+      flex: 0 0 200px;
+      margin-left: 10px;
+    }
+  }
+    
