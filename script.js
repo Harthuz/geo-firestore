@@ -39,8 +39,8 @@ function salvarDados() {
     }
 }
 
-// Função para exibir dados
-db.collection("participantes").orderBy("timestamp").onSnapshot((querySnapshot) => {
+// Função para exibir dados uma única vez
+db.collection("participantes").orderBy("timestamp").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         const dados = doc.data();
         // Percorre todos os tópicos para encontrar correspondências
@@ -57,6 +57,8 @@ db.collection("participantes").orderBy("timestamp").onSnapshot((querySnapshot) =
             }
         }
     });
+}).catch((error) => {
+    console.error("Erro ao buscar dados:", error);
 });
 
 
