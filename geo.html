@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Seminário - China e IA</title>
+    <style>
+        button {
+            background-color: #0B2433;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0D3B4C;
+        }
+
+        button:active {
+            background-color: #09202A;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 30px;
+            color: #333;
+        }
+        h2 {
+            color: #0B2433;
+            margin-top: 30px;
+        }
+        .linha {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+        .linha input[type="text"] {
+            padding: 5px;
+            flex: 1;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Abertura</h2>
+        <div class="linha"><input type="checkbox" id="topico1"><span>Apresentação dos palestrantes e do tema do seminário.</span><input type="text" id="nome1" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico2"><span>Contextualização da ascensão da China e sua importância na economia global.</span><input type="text" id="nome2" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico3"><span>Apresentação das questões-chave a serem exploradas...</span><input type="text" id="nome3" placeholder="Nome"></div>
+
+        <h2>A Resposta da China à Crise de 2007-2008</h2>
+        <div class="linha"><input type="checkbox" id="topico4"><span>Contexto da crise global de 2007-2008 e seus impactos.</span><input type="text" id="nome4" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico5"><span>Efeito da crise na China, incluindo desafios e perdas de emprego.</span><input type="text" id="nome5" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico6"><span>Estratégia chinesa de estímulo econômico e investimento em infraestrutura...</span><input type="text" id="nome6" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico7"><span>Resultados e análise do sucesso da China em gerar empregos...</span><input type="text" id="nome7" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico8"><span>Discussão sobre o modelo chinês, contrapondo intervenção estatal e austeridade.</span><input type="text" id="nome8" placeholder="Nome"></div>
+
+        <h2>A Natureza do Sistema Chinês</h2>
+        <div class="linha"><input type="checkbox" id="topico9"><span>Definição e princípios do socialismo com características chinesas.</span><input type="text" id="nome9" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico10"><span>Papel do Partido Comunista Chinês (PCC).</span><input type="text" id="nome10" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico11"><span>Elementos de mercado na economia chinesa.</span><input type="text" id="nome11" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico12"><span>Debate sobre a natureza do sistema econômico chinês...</span><input type="text" id="nome12" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico13"><span>Discussão sobre onde a China se encaixa no espectro político-econômico...</span><input type="text" id="nome13" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico14"><span>Análise da sustentabilidade e replicabilidade do modelo chinês.</span><input type="text" id="nome14" placeholder="Nome"></div>
+
+        <h2>Inteligência Artificial e o Futuro do Socialismo</h2>
+        <div class="linha"><input type="checkbox" id="topico15"><span>Investimentos e avanços da China em inteligência artificial (IA).</span><input type="text" id="nome15" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico16"><span>Impacto da IA no mercado de trabalho e na produção.</span><input type="text" id="nome16" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico17"><span>Discussão sobre como a IA pode contribuir para os objetivos socialistas...</span><input type="text" id="nome17" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico18"><span>Modelos teóricos de um socialismo com IA e cenários futuros...</span><input type="text" id="nome18" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico19"><span>Implicações da IA para a distribuição de renda e a justiça social...</span><input type="text" id="nome19" placeholder="Nome"></div>
+
+        <h2>Síntese e Conclusões</h2>
+        <div class="linha"><input type="checkbox" id="topico20"><span>Revisão dos principais pontos abordados no seminário.</span><input type="text" id="nome20" placeholder="Nome"></div>
+        <div class="linha"><input type="checkbox" id="topico21"><span>Considerações finais sobre o papel da China no futuro do socialismo...</span><input type="text" id="nome21" placeholder="Nome"></div>
+        <button onclick="salvarDados()">Salvar</button>
+        <div id="listaNomes"></div>
+    </div>
+    
+
+      <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+  <script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+    apiKey: "AIzaSyAFgcyFu8NTYisUstSinzA1cmVdtsxVyU4",
+    authDomain: "geogra-b53f7.firebaseapp.com",
+    projectId: "geogra-b53f7",
+    storageBucket: "geogra-b53f7.firebasestorage.app",
+    messagingSenderId: "335004312628",
+    appId: "1:335004312628:web:3bfc52a6d3e55585651661"
+  };
+
+
+    // Inicializar o Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Função para salvar dados
+    function salvarDados() {
+      const topico = document.getElementById('topico1');
+      const nome = document.getElementById('nome1').value;
+
+      if (topico.checked && nome) {
+        db.collection("participantes").add({
+          topico: "Apresentação dos palestrantes e do tema do seminário.",
+          nome: nome,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(() => {
+          console.log("Dados salvos com sucesso!");
+          document.getElementById('nome1').value = '';
+          topico.checked = false;
+        })
+        .catch((error) => {
+          console.error("Erro ao salvar dados: ", error);
+        });
+      }
+    }
+
+    // Função para exibir dados
+    db.collection("participantes").orderBy("timestamp").onSnapshot((querySnapshot) => {
+      const lista = document.getElementById('listaNomes');
+      lista.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const dados = doc.data();
+        const div = document.createElement('div');
+        div.textContent = `${dados.nome} - ${dados.topico}`;
+        lista.appendChild(div);
+      });
+    });
+  </script>
+
+
+</body>
+</html>
