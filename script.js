@@ -15,37 +15,50 @@ const db = firebase.firestore();
 
 // Função para salvar dados
 function salvarDados() {
-    const topico = document.getElementById('topico1');
-    const nome = document.getElementById('nome1').value;
+    for (let i = 1; i <= 21; i++) {
+        const checkbox = document.getElementById(`topico${i}`);
+        const input = document.getElementById(`nome${i}`);
+        const nome = input.value.trim();
+        const topicoTexto = checkbox.nextElementSibling.textContent.trim();
 
-    if (topico.checked && nome) {
-        db.collection("participantes").add({
-            topico: "Apresentação dos palestrantes e do tema do seminário.",
-            nome: nome,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
+        if (checkbox.checked && nome) {
+            db.collection("participantes").add({
+                topico: topicoTexto,
+                nome: nome,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
             .then(() => {
-                console.log("Dados salvos com sucesso!");
-                document.getElementById('nome1').value = '';
-                topico.checked = false;
+                console.log(`Dados do tópico ${i} salvos com sucesso!`);
+                // Atualiza o valor do campo de entrada
+                input.value = nome;
             })
             .catch((error) => {
-                console.error("Erro ao salvar dados: ", error);
+                console.error(`Erro ao salvar dados do tópico ${i}: `, error);
             });
+        }
     }
 }
 
 // Função para exibir dados
 db.collection("participantes").orderBy("timestamp").onSnapshot((querySnapshot) => {
-    const lista = document.getElementById('listaNomes');
-    lista.innerHTML = '';
     querySnapshot.forEach((doc) => {
         const dados = doc.data();
-        const div = document.createElement('div');
-        div.textContent = `${dados.nome} - ${dados.topico}`;
-        lista.appendChild(div);
+        // Percorre todos os tópicos para encontrar correspondências
+        for (let i = 1; i <= 21; i++) {
+            const topicoElement = document.getElementById(`topico${i}`);
+            const nomeInput = document.getElementById(`nome${i}`);
+            if (topicoElement && nomeInput) {
+                const label = topicoElement.nextElementSibling;
+                if (label && label.textContent.trim() === dados.topico.trim()) {
+                    nomeInput.value = dados.nome;
+                    topicoElement.checked = true;
+                    break;
+                }
+            }
+        }
     });
 });
+
 
 const button = document.getElementById('salvarBtn');
 button.addEventListener('click', () => {
