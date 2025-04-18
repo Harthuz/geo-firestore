@@ -3,55 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Seminário - China e IA</title>
-    <style>
-        button {
-            background-color: #0B2433;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0D3B4C;
-        }
-
-        button:active {
-            background-color: #09202A;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 30px;
-            color: #333;
-        }
-        h2 {
-            color: #0B2433;
-            margin-top: 30px;
-        }
-        .linha {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            gap: 10px;
-        }
-        .linha input[type="text"] {
-            padding: 5px;
-            flex: 1;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <div class="container">
@@ -85,66 +39,12 @@
         <h2>Síntese e Conclusões</h2>
         <div class="linha"><input type="checkbox" id="topico20"><span>Revisão dos principais pontos abordados no seminário.</span><input type="text" id="nome20" placeholder="Nome"></div>
         <div class="linha"><input type="checkbox" id="topico21"><span>Considerações finais sobre o papel da China no futuro do socialismo...</span><input type="text" id="nome21" placeholder="Nome"></div>
-        <button onclick="salvarDados()">Salvar</button>
+        <button id="salvarBtn" onclick="salvarDados()">Salvar</button>
         <div id="listaNomes"></div>
     </div>
     
 
       <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-
-  <script>
-    // Configuração do Firebase
-    const firebaseConfig = {
-    apiKey: "AIzaSyAFgcyFu8NTYisUstSinzA1cmVdtsxVyU4",
-    authDomain: "geogra-b53f7.firebaseapp.com",
-    projectId: "geogra-b53f7",
-    storageBucket: "geogra-b53f7.firebasestorage.app",
-    messagingSenderId: "335004312628",
-    appId: "1:335004312628:web:3bfc52a6d3e55585651661"
-  };
-
-
-    // Inicializar o Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    // Função para salvar dados
-    function salvarDados() {
-      const topico = document.getElementById('topico1');
-      const nome = document.getElementById('nome1').value;
-
-      if (topico.checked && nome) {
-        db.collection("participantes").add({
-          topico: "Apresentação dos palestrantes e do tema do seminário.",
-          nome: nome,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .then(() => {
-          console.log("Dados salvos com sucesso!");
-          document.getElementById('nome1').value = '';
-          topico.checked = false;
-        })
-        .catch((error) => {
-          console.error("Erro ao salvar dados: ", error);
-        });
-      }
-    }
-
-    // Função para exibir dados
-    db.collection("participantes").orderBy("timestamp").onSnapshot((querySnapshot) => {
-      const lista = document.getElementById('listaNomes');
-      lista.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        const dados = doc.data();
-        const div = document.createElement('div');
-        div.textContent = `${dados.nome} - ${dados.topico}`;
-        lista.appendChild(div);
-      });
-    });
-  </script>
-
-
+  <script src="script.js"></script>
 </body>
 </html>
