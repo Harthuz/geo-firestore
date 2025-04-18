@@ -69,4 +69,4 @@ button.addEventListener('click', () => {
     }, 200);
 });
 
-console.log("Arquivo script.js carregado com sucesso! 1");
+console.log("Arquivo script.js carregado com sucesso! 18-4-2025 14:48");
